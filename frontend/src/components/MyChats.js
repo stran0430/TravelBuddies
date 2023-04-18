@@ -8,15 +8,13 @@ import ChatLoading from "./ChatLoading";
 import { getSender } from "../config/ChatLogics";
 import { ChatState } from "../Context/ChatProvider";
 
-const MyChats = (fetchAgain) => {
-  const [loggedUser, setLoggedUser] = useState();
-
+const MyChats = ({ fetchAgain }) => {
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
+  const [loggedUser, setLoggedUser] = useState();
 
   const toast = useToast();
 
   const fetchChats = async () => {
-    //console.log(user._id);
     try {
       const config = {
         headers: {
@@ -25,16 +23,15 @@ const MyChats = (fetchAgain) => {
       };
 
       const { data } = await axios.get("/api/chat", config);
-      console.log(data);
       setChats(data);
     } catch (error) {
       toast({
-        title: "Error Occured!!",
+        title: "Error Occurred!!",
         description: "Failed to load chats",
         status: "error",
         duration: 5000,
         isClosable: true,
-        postion: "bottom-left",
+        position: "bottom-left",
       });
     }
   };
@@ -42,7 +39,7 @@ const MyChats = (fetchAgain) => {
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchAgain]);
 
   return (
@@ -60,13 +57,13 @@ const MyChats = (fetchAgain) => {
         pb={3}
         px={3}
         fontSize={{ base: "28px", md: "30px" }}
-        fontFamily="Work sans"
+        fontFamily="Work Sans"
         display="flex"
         w="100%"
         justifyContent="space-between"
         alignItems="center"
       >
-        MyChats
+        My Chats
         <Button
           display="flex"
           fontSize={{ base: "17px", md: "10px", lg: "17px" }}
@@ -83,7 +80,6 @@ const MyChats = (fetchAgain) => {
         w="100%"
         h="100%"
         borderRadius="lg"
-        overFlowy="hidden"
       >
         {chats ? (
           <Stack overflowY="scroll">
@@ -113,4 +109,5 @@ const MyChats = (fetchAgain) => {
     </Box>
   );
 };
+
 export default MyChats;

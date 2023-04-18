@@ -9,11 +9,11 @@ import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [show, setShow] = useState(false);
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [confirmpassword, setConfirmpassword] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [confirmpassword, setConfirmpassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState("");
 
   const toast = useToast();
   const history = useNavigate();
@@ -28,7 +28,7 @@ const Signup = () => {
         status: "warning",
         duration: 5000,
         isClosable: true,
-        postion: "bottom",
+        position: "bottom",
       });
       setLoading(false);
       return;
@@ -66,7 +66,7 @@ const Signup = () => {
       localStorage.setItem("userInfo", JSON.stringify(data));
 
       setLoading(false);
-      history("/chats");
+      history("/chats")();
     } catch (error) {
       toast({
         title: "Error Occured!",

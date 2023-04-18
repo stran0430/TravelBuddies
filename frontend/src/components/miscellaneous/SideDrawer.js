@@ -37,12 +37,12 @@ const SideDrawer = () => {
   const [loadingChat, setLoadingChat] = useState();
 
   const { user, setSelectedChat, chats, setChats } = ChatState();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const logoutHandler = () => {
     localStorage.remove.Item("userInfo");
-    history("/");
+    navigate("/");
   };
   const toast = useToast();
 
@@ -62,7 +62,7 @@ const SideDrawer = () => {
 
       const config = {
         headers: {
-          Authorizization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${user.token}`,
         },
       };
 
@@ -171,7 +171,7 @@ const SideDrawer = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <Button onCLick={handleSearch}>Go</Button>
+              <Button onClick={handleSearch}>Go</Button>
             </Box>
             {loading ? (
               <ChatLoading />

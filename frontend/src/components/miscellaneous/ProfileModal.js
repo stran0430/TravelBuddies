@@ -18,12 +18,20 @@ import React from "react";
 const ProfileModal = ({ user, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const handleOpenModal = () => {
+    onOpen();
+  };
+
   return (
     <>
       {children ? (
-        <span onCLick={onOpen}>{children}</span>
+        <span onClick={handleOpenModal}>{children}</span>
       ) : (
-        <IconButton d={{ base: "flex" }} icon={<ViewIcon />} onClick={onOpen} />
+        <IconButton
+          d={{ base: "flex" }}
+          icon={<ViewIcon />}
+          onClick={handleOpenModal}
+        />
       )}
       <Modal size="lg" isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
@@ -34,7 +42,7 @@ const ProfileModal = ({ user, children }) => {
             display="flex"
             justifyContent="center"
           >
-            {user.name}
+            {user?.name || ""}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody
@@ -45,14 +53,14 @@ const ProfileModal = ({ user, children }) => {
             <Image
               borderRadius="full"
               boxSize="150px"
-              src={user.pic}
-              alt={user.name}
+              src={user?.pic || ""}
+              alt={user?.name || ""}
             />
             <Text
               fontSize={{ base: "28px", md: "30px" }}
               fontFamily="Work sans"
             >
-              Email: {user.email}
+              Email: {user?.email || ""}
             </Text>
           </ModalBody>
 

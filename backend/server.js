@@ -14,10 +14,6 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("API is Running Successfully");
-});
-
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 
@@ -31,7 +27,7 @@ if (process.env.NODE_ENV === "production") {
   );
 } else {
   app.get("/", (req, res) => {
-    res.send("API is running..");
+    res.send("API is Running Successfully");
   });
 }
 
