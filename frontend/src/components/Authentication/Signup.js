@@ -5,7 +5,7 @@ import { VStack } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [show, setShow] = useState(false);
@@ -16,7 +16,7 @@ const Signup = () => {
   const [password, setPassword] = useState();
 
   const toast = useToast();
-  const history = useHistory();
+  const history = useNavigate();
 
   const handleClick = () => setShow(!show);
 
@@ -66,7 +66,7 @@ const Signup = () => {
       localStorage.setItem("userInfo", JSON.stringify(data));
 
       setLoading(false);
-      history.push("/chats");
+      history("/chats");
     } catch (error) {
       toast({
         title: "Error Occured!",
